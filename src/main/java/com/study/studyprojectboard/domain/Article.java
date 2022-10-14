@@ -26,7 +26,7 @@ import java.util.Set;
 
 })
 @Entity
-public class Article {
+public class Article extends AuditingFields{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
