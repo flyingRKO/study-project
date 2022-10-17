@@ -10,7 +10,7 @@ logging:
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/board
-    username: rko
+    username: root
     password: Qlalfqjsgh18!
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
@@ -21,6 +21,8 @@ spring:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
   sql.init.mode: always
-
+  data.rest:
+    base-path: /api
+    detection-strategy: annotated
 
 
