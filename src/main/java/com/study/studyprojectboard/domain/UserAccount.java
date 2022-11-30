@@ -1,10 +1,12 @@
 package com.study.studyprojectboard.domain;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+@Getter
 @Table(indexes = {
         @Index(columnList = "userId"),
         @Index(columnList = "email", unique = true),
