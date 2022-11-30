@@ -93,4 +93,20 @@ public class DataRestTest {
 
     }
 
+    @DisplayName("[api] 댓글 단건 조회")
+    @Test
+    void givenNothing_whenRequestingUserAccounts_thenThrowsException() throws Exception {
+        // Given
+
+
+        // When & Ten
+        mvc.perform(get("/api/userAccounts")).andExpect(status().isNotFound());
+        mvc.perform(post("/api/userAccounts")).andExpect(status().isNotFound());
+        mvc.perform(put("/api/userAccounts")).andExpect(status().isNotFound());
+        mvc.perform(patch("/api/userAccounts")).andExpect(status().isNotFound());
+        mvc.perform(delete("/api/userAccounts")).andExpect(status().isNotFound());
+        mvc.perform(head("/api/userAccounts")).andExpect(status().isNotFound());
+
+    }
+
 }
