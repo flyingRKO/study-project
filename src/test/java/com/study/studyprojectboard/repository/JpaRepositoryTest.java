@@ -50,8 +50,8 @@ class JpaRepositoryTest {
     @Test
     void givenTestData_whenInserting_thanWorksFine(){
         // Given
-        long previousCont = articleRepository.count();
-        UserAccount userAccount = userAccountRepository.save(UserAccount.of("rko", "pw",null,null,null));
+        long previousCount = articleRepository.count();
+        UserAccount userAccount = userAccountRepository.save(UserAccount.of("newRko", "pw",null,null,null));
         Article article = Article.of(userAccount, "new article", "new content","#spring");
 
 
@@ -59,7 +59,7 @@ class JpaRepositoryTest {
         articleRepository.save(article);
 
         // Then
-        assertThat(articleRepository.count()).isEqualTo(previousCont + 1);
+        assertThat(articleRepository.count()).isEqualTo(previousCount + 1);
 
     }
 

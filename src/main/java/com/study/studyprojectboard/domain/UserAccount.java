@@ -2,13 +2,15 @@ package com.study.studyprojectboard.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
+@ToString
 @Table(indexes = {
-        @Index(columnList = "userId"),
+        @Index(columnList = "userId", unique = true),
         @Index(columnList = "email", unique = true),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
@@ -24,7 +26,7 @@ public class UserAccount extends AuditingFields{
 
     @Setter @Column(length = 100) private String email;
     @Setter @Column(length = 100) private String nickname;
-    private String memo;
+    @Setter private String memo;
 
     protected UserAccount(){}
     private UserAccount(String userId, String userPassword, String email, String nickname, String memo) {
