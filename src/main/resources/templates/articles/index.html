@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
 <header id="header">
   헤더 삽입부
   <hr>
@@ -24,7 +23,7 @@
   <div class="row">
     <div class="card card-margin search-form">
       <div class="card-body p-0">
-        <form action="/articles" method="get">
+        <form id="search-form">
           <div class="row">
             <div class="col-12">
               <div class="row no-gutters">
@@ -58,6 +57,7 @@
     </div>
   </div>
 
+  <div class="row">
   <table class="table" id="article-table">
     <thead>
     <tr>
@@ -88,7 +88,16 @@
     </tr>
     </tbody>
   </table>
+  </div>
 
+
+  <div class="row">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a class="btn btn-primary me-md-2" role="button" id="write-article">글쓰기</a>
+    </div>
+  </div>
+
+  <div class="row">
   <nav id="pagination" aria-label="Page navigation">
     <ul class="pagination justify-content-center">
       <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -96,6 +105,7 @@
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
   </nav>
+  </div>
 </main>
 
 <footer id="footer">
