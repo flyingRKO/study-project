@@ -1,12 +1,13 @@
 package com.study.studyprojectboard.dto.response;
 
+import com.study.studyprojectboard.dto.ArticleCommentDto;
 import com.study.studyprojectboard.dto.ArticleWithCommentsDto;
 import com.study.studyprojectboard.dto.HashtagDto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public record ArticleWithCommentsResponse(
@@ -42,9 +43,30 @@ public record ArticleWithCommentsResponse(
                 dto.userAccountDto().email(),
                 nickname,
                 dto.userAccountDto().userId(),
-                dto.articleCommentDtos().stream()
-                        .map(ArticleCommentResponse::from)
-                        .collect(Collectors.toCollection(LinkedHashSet::new))
+                organizeChildComments(dto.articleCommentDtos())
         );
+    }
+    //각 댓글과 그 자식 댓글들을 올바르게 연결하고, 부모 댓글이 없는 댓글들을 찾고 정렬하여 반환
+    private static Set<ArticleCommentResponse> organizeChildComments(Set<ArticleCommentDto> dtos){
+        Map<Long, ArticleCommentResponse> map = dtos.stream()
+                .map(ArticleCommentResponse::from)
+                .collect(Collectors.toMap(ArticleCommentResponse::id, Function.identity()));
+
+        map.values().stream()
+                .filter(ArticleCommentResponse::hasParentComment)
+                .forEach(comment -> {
+                    ArticleCommentResponse parentComment = map.get(comment.parentCommentId());
+                    parentComment.childComments().add(comment);
+                });
+
+        return map.values().stream()
+                .filter(comment -> !comment.hasParentComment())
+                .collect(Collectors.toCollection(() ->
+                        new TreeSet<>(Comparator
+                                .comparing(ArticleCommentResponse::createdAt)
+                                .reversed()
+                                .thenComparingLong(ArticleCommentResponse::id)
+                        )
+                ));
     }
 }
