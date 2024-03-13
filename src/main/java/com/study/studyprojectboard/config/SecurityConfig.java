@@ -38,12 +38,11 @@ public class SecurityConfig {
                         .mvcMatchers(
                                 HttpMethod.GET,
                                 "/",
-                                "/articles",
+                                "/articles/**",
                                 "/articles/search-hashtag"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults())
                 .logout(logout -> logout.logoutSuccessUrl("/"))
                 .oauth2Login(oAuth -> oAuth
                         .userInfoEndpoint(userInfo -> userInfo
