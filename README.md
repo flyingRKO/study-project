@@ -8,10 +8,10 @@
 
 ## 어플리케이션 아키텍처
 
-![어플리케이션 아키텍처](./images/Application%20Architecture.png)
+![어플리케이션 아키텍처](./src/main/resources/static/images/Application%20Architecture.png)
 
 ## ERD
-![ERD](./images/erd.png)
+![ERD](src/main/resources/static/images/erd.png)
 
 ## 개발 환경
 
