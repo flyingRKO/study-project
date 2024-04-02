@@ -1,6 +1,8 @@
 # 학습용으로 만들어 본 게시판 서비스
 
-가장 기본적이고 보편적인 게시판 기능을 둘러볼 수 있는 서비스. 스프링 부트와 관련 기술들, 자바 17 기능들, 개발 도구들을 경험할 수 있도록 만들어졌다.
+이 프로젝트는 학습용으로 만들어보는 게시판 클론 코딩 프로젝트입니다. 
+가장 기본적이고 보편적인 게시판 기능을 둘러볼 수 있습니다. 
+스프링 부트와 관련 기술들, 자바 17 기능들, 개발 도구들을 경험할 수 있었습니다.
 
 ## 데모 페이지
 
@@ -15,33 +17,21 @@
 
 ## 개발 환경
 
-* Intellij IDEA Ultimate
-* Java 17
-* Gradle 7.4.1
-* Spring Boot 2.7.0
+* `IntelliJ`
+* `Java 17`
+* `Gradle`
+* `git/github`
 
-## 기술 세부 스택
+## 기술 스택
 
-Spring Boot
-
-* Spring Boot Actuator
-* Spring Web
-* Spring Data JPA
-* Rest Repositories
-* Rest Repositories HAL Explorer
-* Thymleaf
-* Spring Security
-* H2 Database
-* MySQL Driver
-* Lombok
-* Spring Boot DevTools
-* Spring Configuration Processor
-
-그 외
-
-* QueryDSL 5.0.0
-* Bootstrap 5.2.0-Beta1
-* Heroku
+* `Spring Boot`
+* `Spring Data JPA`
+* `Thymleaf`
+* `Spring Security`
+* `MySQL`
+* `QueryDSL`
+* `Bootstrap`
+* `Heroku`
 
 ## 주요 기능
 - 카카오 OAuth 로그인
@@ -54,34 +44,34 @@ Spring Boot
 - 카카오 OAuth 로그인
 ```mermaid
 sequenceDiagram
-    actor 사용자
-    participant 클라이언트 as 클라이언트
-    participant 카카오인증서버 as 카카오 인증 서버
-    participant 리소스서버 as 리소스 서버
+    actor User
+    participant Client as Client
+    participant KakaoAuthServer as Kakao Auth Server
+    participant ResourceServer as Resource Server
 
-    사용자->>클라이언트: 로그인 요청
-    클라이언트->>카카오인증서버: 카카오 로그인 페이지로 리다이렉트
-    note over 사용자,카카오인증서버: 사용자 인증
-    카카오인증서버->>사용자: 카카오 로그인 폼
-    사용자->>카카오인증서버: 인증 정보 제공(로그인)
-    카카오인증서버->>클라이언트: 인증 코드 반환
-    클라이언트->>카카오인증서버: 인증 코드를 사용하여 액세스 토큰 요청
-    카카오인증서버->>클라이언트: 액세스 토큰 발급
-    클라이언트->>리소스서버: 액세스 토큰을 사용하여 리소스 요청
-    리소스서버->>클라이언트: 보호된 리소스 응답
-    클라이언트->>사용자: 요청된 데이터 표시
+    User->>Client: Login request
+    Client->>KakaoAuthServer: Redirect to Kakao login page
+    note over User,KakaoAuthServer: User authentication
+    KakaoAuthServer->>User: Kakao login form
+    User->>KakaoAuthServer: Provide authentication information (login)
+    KakaoAuthServer->>Client: Return authorization code
+    Client->>KakaoAuthServer: Request access token using authorization code
+    KakaoAuthServer->>Client: Issue access token
+    Client->>ResourceServer: Request resources using access token
+    ResourceServer->>Client: Respond with protected resources
+    Client->>User: Display requested data
 ```
 
 - 게시글 작성
 ```mermaid
 sequenceDiagram
-    participant 클라이언트
-    participant 컨트롤러 as "Controller"
-    participant 아티클서비스 as "ArticleService"
-    participant 아티클리포지토리 as "ArticleRepository"
-    participant 해시태그서비스 as "HashtagService"
-    participant 해시태그리포지토리 as "HashtagRepository"
-    participant 데이터베이스 as "Database"
+    participant 클라이언트 as Client
+    participant 컨트롤러 as ArticleController
+    participant 아티클서비스 as ArticleService
+    participant 아티클리포지토리 as ArticleRepository
+    participant 해시태그서비스 as HashtagService
+    participant 해시태그리포지토리 as HashtagRepository
+    participant 데이터베이스 as Database
 
     클라이언트->>+컨트롤러: POST /form (ArticleRequest)
     컨트롤러->>+아티클서비스: saveArticle(ArticleDto)
@@ -105,12 +95,12 @@ sequenceDiagram
 - 게시글 리스트 검색 및 조회 
 ```mermaid
 sequenceDiagram
-    participant 클라이언트
-    participant 컨트롤러 as "Controller"
-    participant 아티클서비스 as "ArticleService"
-    participant 아티클리포지토리 as "ArticleRepository"
-    participant 페이지네이션서비스 as "PaginationService"
-    participant 데이터베이스 as "Database"
+    participant 클라이언트 as Client
+    participant 컨트롤러 as ArticleController
+    participant 아티클서비스 as ArticleService
+    participant 아티클리포지토리 as ArticleRepository
+    participant 페이지네이션서비스 as PaginationService
+    participant 데이터베이스 as Database
 
     클라이언트->>+컨트롤러: GET /articles (searchType, searchValue, pageable)
     컨트롤러->>+아티클서비스: searchArticles(searchType, searchValue, pageable)
@@ -133,11 +123,11 @@ sequenceDiagram
 - 게시글 단 건 조회
 ```mermaid
 sequenceDiagram
-    participant 클라이언트
-    participant 컨트롤러 as "Controller"
-    participant 아티클서비스 as "ArticleService"
-    participant 아티클리포지토리 as "ArticleRepository"
-    participant 데이터베이스 as "Database"
+    participant 클라이언트 as Client
+    participant 컨트롤러 as ArticleController
+    participant 아티클서비스 as ArticleService
+    participant 아티클리포지토리 as ArticleRepository
+    participant 데이터베이스 as Database
 
     클라이언트->>+컨트롤러: GET /{articleId}
     컨트롤러->>+아티클서비스: getArticleWithComments(articleId)
@@ -158,13 +148,13 @@ sequenceDiagram
 - 해시태그 검색
 ```mermaid
 sequenceDiagram
-    participant 클라이언트
-    participant 컨트롤러 as "Controller"
-    participant 아티클서비스 as "ArticleService"
-    participant 아티클리포지토리 as "ArticleRepository"
-    participant 페이지네이션서비스 as "PaginationService"
-    participant 해시태그리포지토리 as "HashtagRepository"
-    participant 데이터베이스 as "Database"
+    participant 클라이언트 as Client
+    participant 컨트롤러 as ArticleController
+    participant 아티클서비스 as ArticleService
+    participant 아티클리포지토리 as ArticleRepository
+    participant 페이지네이션서비스 as PaginationService
+    participant 해시태그리포지토리 as HashtagRepository
+    participant 데이터베이스 as Database
 
     클라이언트->>+컨트롤러: GET /search-hashtag (searchValue, pageable)
     컨트롤러->>+아티클서비스: searchArticlesViaHashtag(searchValue, pageable)
@@ -187,14 +177,14 @@ sequenceDiagram
 - 게시글 수정
 ```mermaid
 sequenceDiagram
-    participant 클라이언트
-    participant 컨트롤러 as "Controller"
-    participant 아티클서비스 as "ArticleService"
-    participant 아티클리포지토리 as "ArticleRepository"
-    participant 유저어카운트리포지토리 as "UserAccountRepository"
-    participant 해시태그서비스 as "HashtagService"
-    participant 해시태그리포지토리 as "HashtagRepository"
-    participant 데이터베이스 as "Database"
+    participant 클라이언트 as Client
+    participant 컨트롤러 as ArticleController
+    participant 아티클서비스 as ArticleService
+    participant 아티클리포지토리 as ArticleRepository
+    participant 유저어카운트리포지토리 as UserAccountRepository
+    participant 해시태그서비스 as HashtagService
+    participant 해시태그리포지토리 as HashtagRepository
+    participant 데이터베이스 as Database
 
     클라이언트->>+컨트롤러: POST /{articleId}/form (ArticleRequest)
     컨트롤러->>+아티클서비스: updateArticle(articleId, ArticleDto)
@@ -223,14 +213,14 @@ sequenceDiagram
 - 게시글 삭제
 ```mermaid
 sequenceDiagram
-    participant 클라이언트
-    participant 컨트롤러 as "Controller"
-    participant 아티클서비스 as "ArticleService"
-    participant 아티클리포지토리 as "ArticleRepository"
-    participant 해시태그서비스 as "HashtagService"
-    participant 해시태그리포지토리 as "HashtagRepository"
-    participant 데이터베이스 as "Database"
-
+    participant 클라이언트 as Client
+    participant 컨트롤러 as ArticleController
+    participant 아티클서비스 as ArticleService
+    participant 아티클리포지토리 as ArticleRepository
+    participant 해시태그서비스 as HashtagService
+    participant 해시태그리포지토리 as HashtagRepository
+    participant 데이터베이스 as Database
+    
     클라이언트->>+컨트롤러: POST /{articleId}/delete
     컨트롤러->>+아티클서비스: deleteArticle(articleId, username)
     아티클서비스->>+아티클리포지토리: getReferenceById(articleId)
@@ -255,13 +245,13 @@ sequenceDiagram
 - 댓글 작성
 ```mermaid
 sequenceDiagram
-    participant 클라이언트
-    participant 아티클코멘트컨트롤러 as "ArticleCommentController"
-    participant 아티클코멘트서비스 as "ArticleCommentService"
-    participant 아티클코멘트리포지토리 as "ArticleCommentRepository"
-    participant 아티클리포지토리 as "ArticleRepository"
-    participant 유저어카운트리포지토리 as "UserAccountRepository"
-    participant 데이터베이스 as "Database"
+    participant 클라이언트 as Client
+    participant 아티클코멘트컨트롤러 as ArticleCommentController
+    participant 아티클코멘트서비스 as ArticleCommentService
+    participant 아티클코멘트리포지토리 as ArticleCommentRepository
+    participant 아티클리포지토리 as ArticleRepository
+    participant 유저어카운트리포지토리 as UserAccountRepository
+    participant 데이터베이스 as Database
 
     클라이언트->>+아티클코멘트컨트롤러: POST /new (ArticleCommentRequest)
     아티클코멘트컨트롤러->>+아티클코멘트서비스: saveArticleComment(ArticleCommentDto)
@@ -288,11 +278,11 @@ sequenceDiagram
 - 댓글 삭제
 ```mermaid
 sequenceDiagram
-    participant 클라이언트
-    participant 컨트롤러 as "ArticleCommentController"
-    participant 아티클코멘트서비스 as "ArticleCommentService"
-    participant 아티클코멘트리포지토리 as "ArticleCommentRepository"
-    participant 데이터베이스 as "Database"
+    participant 클라이언트 as Client
+    participant 컨트롤러 as ArticleCommentController
+    participant 아티클코멘트서비스 as ArticleCommentService
+    participant 아티클코멘트리포지토리 as ArticleCommentRepository
+    participant 데이터베이스 as Database
 
     클라이언트->>+컨트롤러: POST /{commentId}/delete
     컨트롤러->>+아티클코멘트서비스: deleteArticleComment(commentId, username)
