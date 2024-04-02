@@ -13,7 +13,7 @@
 ![어플리케이션 아키텍처](./src/main/resources/static/images/Application%20Architecture.png)
 
 ## ERD
-![ERD](src/main/resources/static/images/erd.png)
+![ERD](src/main/resources/static/images/ERD.png)
 
 ## 개발 환경
 
@@ -24,12 +24,12 @@
 
 ## 기술 스택
 
-* `Spring Boot`
+* `Spring Boot MVC`
 * `Spring Data JPA`
-* `Thymleaf`
 * `Spring Security`
 * `MySQL`
 * `QueryDSL`
+* `Thymleaf`
 * `Bootstrap`
 * `Heroku`
 
