@@ -4,13 +4,19 @@
 가장 기본적이고 보편적인 게시판 기능을 둘러볼 수 있습니다. 
 스프링 부트와 관련 기술들, 자바 17 기능들, 개발 도구들을 경험할 수 있었습니다.
 
-## 데모 페이지
+## 결과물
 
 * https://project-board-rko.herokuapp.com
 
+![초기화면](./src/main/resources/static/images/초기화면.png)
+
+![게시물](./src/main/resources/static/images/게시물.png)
+
+![해시태그](./src/main/resources/static/images/해시태그.png)
+
 ## 어플리케이션 아키텍처
 
-![어플리케이션 아키텍처](./src/main/resources/static/images/Application%20Architecture.png)
+![게시판아키텍처](./src/main/resources/static/images/게시판아키텍처.png)
 
 ## ERD
 ![ERD](src/main/resources/static/images/ERD.png)
